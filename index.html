@@ -7,9 +7,7 @@
 <title>Love Heart ❤️</title>
 
 <style>
-
-html,
-body {
+html, body {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -46,14 +44,14 @@ video {
 
     z-index: 9999;
     cursor: pointer;
+
+    transition: opacity 0.8s ease;
 }
 
 .hidden {
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.8s ease;
 }
-
 </style>
 </head>
 
@@ -64,7 +62,7 @@ video {
 </div>
 
 <video id="video" loop playsinline>
-    <source src="heart%20project.mp4" type="video/mp4">
+    <source src="heart_project.mp4" type="video/mp4">
 </video>
 
 <audio id="music" loop>
@@ -72,19 +70,21 @@ video {
 </audio>
 
 <script>
-
-document.body.addEventListener("click", async () => {
+document.getElementById("tap").addEventListener("click", async function () {
 
     const video = document.getElementById("video");
     const music = document.getElementById("music");
     const tap = document.getElementById("tap");
 
-    video.currentTime = 0;
-    music.currentTime = 0;
-
     try {
-        await video.play();
-        await music.play();
+
+        video.currentTime = 0;
+        music.currentTime = 0;
+
+        await Promise.all([
+            video.play(),
+            music.play()
+        ]);
 
         tap.classList.add("hidden");
 
@@ -93,11 +93,11 @@ document.body.addEventListener("click", async () => {
         }, 800);
 
     } catch (err) {
-        console.log(err);
+        console.error(err);
+        alert("Couldn't start audio. Check if finalised.mp3 exists in the repository.");
     }
 
 }, { once: true });
-
 </script>
 
 </body>
