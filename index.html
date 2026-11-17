@@ -8,28 +8,50 @@
 
 <style>
 html, body {
+    margin: 0;
     width: 100%;
     height: 100%;
-    margin: 0;
-    overflow: hidden;
     background: black;
+    overflow: hidden;
 }
 
 video {
-    width: 130vw;
-    height: 130vh;
+    width: 100vw;
+    height: 100vh;
     object-fit: contain;
-    transform: translate(-15vw, -15vh);
 }
+
+#tap {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+    z-index: 10;
 }
 </style>
 </head>
 
 <body>
 
+<div id="tap">❤️ Tap Anywhere ❤️</div>
+
 <video autoplay muted loop playsinline>
     <source src="heart%20project.mp4" type="video/mp4">
 </video>
+
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.body.addEventListener('click', function() {
+    document.getElementById('music').play();
+    document.getElementById('tap').style.display = 'none';
+}, { once: true });
+</script>
 
 </body>
 </html>
