@@ -16,8 +16,6 @@ html, body {
 }
 
 #video {
-    position: fixed;
-    inset: 0;
     width: 100vw;
     height: 100vh;
     object-fit: contain;
@@ -52,11 +50,11 @@ html, body {
 
 <body>
 
-<video id="video" playsinline preload="auto">
-    <source src="heart_project.mp4" type="video/mp4">
+<video id="video" playsinline>
+    <source src="heart%20project.mp4" type="video/mp4">
 </video>
 
-<audio id="music" preload="auto">
+<audio id="music">
     <source src="finalised.mp3" type="audio/mpeg">
 </audio>
 
@@ -69,7 +67,7 @@ const tap = document.getElementById("tap");
 const video = document.getElementById("video");
 const music = document.getElementById("music");
 
-tap.addEventListener("click", function () {
+tap.addEventListener("click", () => {
 
     tap.style.display = "none";
 
