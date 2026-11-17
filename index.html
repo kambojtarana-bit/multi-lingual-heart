@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Love Heart</title>
+<title>Love Heart ❤️</title>
 
 <style>
-html, body {
+
+html,
+body {
     margin: 0;
+    padding: 0;
     width: 100%;
     height: 100%;
-    background: black;
     overflow: hidden;
+    background: black;
 }
 
 video {
@@ -23,22 +26,44 @@ video {
 
 #tap {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 24px;
-    font-family: Arial, sans-serif;
-    z-index: 10;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: black;
+    color: #ffb6c1;
+
+    font-family: "Lucida Calligraphy", cursive;
+    font-size: 42px;
+    font-weight: bold;
+
+    text-shadow:
+        0 0 10px #ff69b4,
+        0 0 20px #ff1493,
+        0 0 30px #ff1493;
+
+    z-index: 9999;
+    cursor: pointer;
 }
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+}
+
 </style>
 </head>
 
 <body>
 
-<div id="tap">❤️ Tap Anywhere ❤️</div>
+<div id="tap">
+    ❤️ Tap Anywhere ❤️
+</div>
 
-<video autoplay muted loop playsinline>
+<video id="video" loop playsinline>
     <source src="heart%20project.mp4" type="video/mp4">
 </video>
 
@@ -47,10 +72,32 @@ video {
 </audio>
 
 <script>
-document.body.addEventListener('click', function() {
-    document.getElementById('music').play();
-    document.getElementById('tap').style.display = 'none';
+
+document.body.addEventListener("click", async () => {
+
+    const video = document.getElementById("video");
+    const music = document.getElementById("music");
+    const tap = document.getElementById("tap");
+
+    video.currentTime = 0;
+    music.currentTime = 0;
+
+    try {
+        await video.play();
+        await music.play();
+
+        tap.classList.add("hidden");
+
+        setTimeout(() => {
+            tap.style.display = "none";
+        }, 800);
+
+    } catch (err) {
+        console.log(err);
+    }
+
 }, { once: true });
+
 </script>
 
 </body>
