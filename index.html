@@ -9,17 +9,19 @@
 <style>
 html, body {
     margin: 0;
-    padding: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
     background: black;
 }
 
-video {
+#video {
+    position: fixed;
+    inset: 0;
     width: 100vw;
     height: 100vh;
     object-fit: contain;
+    background: black;
 }
 
 #tap {
@@ -44,58 +46,38 @@ video {
 
     z-index: 9999;
     cursor: pointer;
-
-    transition: opacity 0.8s ease;
-}
-
-.hidden {
-    opacity: 0;
-    pointer-events: none;
 }
 </style>
 </head>
 
 <body>
 
+<video id="video" playsinline preload="auto">
+    <source src="heart_project.mp4" type="video/mp4">
+</video>
+
+<audio id="music" preload="auto">
+    <source src="finalised.mp3" type="audio/mpeg">
+</audio>
+
 <div id="tap">
     ❤️ Tap Anywhere ❤️
 </div>
 
-<video id="video" loop playsinline>
-    <source src="heart_project.mp4" type="video/mp4">
-</video>
-
-<audio id="music" loop>
-    <source src="finalised.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-document.getElementById("tap").addEventListener("click", async function () {
+const tap = document.getElementById("tap");
+const video = document.getElementById("video");
+const music = document.getElementById("music");
 
-    const video = document.getElementById("video");
-    const music = document.getElementById("music");
-    const tap = document.getElementById("tap");
+tap.addEventListener("click", function () {
 
-    try {
+    tap.style.display = "none";
 
-        video.currentTime = 0;
-        music.currentTime = 0;
+    video.currentTime = 0;
+    music.currentTime = 0;
 
-        await Promise.all([
-            video.play(),
-            music.play()
-        ]);
-
-        tap.classList.add("hidden");
-
-        setTimeout(() => {
-            tap.style.display = "none";
-        }, 800);
-
-    } catch (err) {
-        console.error(err);
-        alert("Couldn't start audio. Check if finalised.mp3 exists in the repository.");
-    }
+    video.play();
+    music.play();
 
 }, { once: true });
 </script>
